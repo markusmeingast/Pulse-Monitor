@@ -55,7 +55,10 @@ Keras-Preprocessing==1.1.0
 Markdown==3.1.1
 mock==3.0.5
 numpy==1.16.4
+pandas==0.24.2
 protobuf==3.8.0
+python-dateutil==2.8.0
+pytz==2019.1
 scikit-learn==0.21.2
 scipy==1.3.0
 six==1.12.0
