@@ -24,6 +24,13 @@ Starting basic setup work for Arduino **Nano** (C-Control compatible board) and 
  - Added "blink" example as placeholder to Nano
  - Set up python 3.7.3 on Pi
 
+## 10.06.2019
+Set up basic serial communication between Arduino (Uno for testing purposes) and Pi.
+ - Restructured project folder
+ - Using EZ1-Range Finder sensor for testing
+ - Implemented try/catch on Pi side to limit communcation issues... further testing and development needed
+ - Set sampling frequnecy to 50Hz
+
 ## Open Topics / Concept issues
  - Serial read frequency (DAQ and transfer should be min ~50Hz)
  - Tensorflow lite model transfer (CPU/GPU --> ARM)
