@@ -12,9 +12,16 @@ import serial
 import numpy as np
 import matplotlib.pyplot as mp
 import datetime
+import sys, os
 
 #####	Define and start serial communication
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM0', 56600)
+
+
+n_len = 4000
+data = np.zeros((n_len,2),dtype=int)
+
+ir = 0
 
 #####	Main loop start
 while True:
@@ -24,7 +31,21 @@ while True:
 		time,value = ser.readline().decode().strip().split(",")
 		time = int(time)
 		value = int(value)
-		print(time,value)
+		data = np.roll(data,-1,axis=0)
+		data[-1,0] = time
+		data[-1,1] = value
+		ir = ir+1
+		if ir == n_len:
+			print('Saving')	
+			np.savetxt('test.dat',data,fmt='%d',delimiter=',')
+			print('Saved')
+			sys.exit()
+		#print(time,value)
+		#print(data)
+		#if ir%n_len == 0:
+		#	mp.plot(data)
+		#	mp.show()
+
 
 	#####	Cancel loop by keyboard interrupt
 	except KeyboardInterrupt:

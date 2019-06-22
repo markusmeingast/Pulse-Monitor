@@ -31,6 +31,13 @@ Set up basic serial communication between Arduino (Uno for testing purposes) and
  - Implemented try/catch on Pi side to limit communcation issues... further testing and development needed
  - Set sampling frequnecy to 50Hz
 
+## 22.06.2019
+Added KY039HS pulse sensor to replace EZ1. Additional code development.
+ - Ramped sampling rate up tp 200Hz
+ - Ramped up serial baud rate to 56.6k
+ - Added initial plotting tool for saved test data
+ - Added sensor documentation
+
 ## Open Topics / Concept issues
  - Serial read frequency (DAQ and transfer should be min ~50Hz)
  - Tensorflow lite model transfer (CPU/GPU --> ARM)
@@ -52,22 +59,31 @@ Kernel 4.19.42-v7+
 ```
 absl-py==0.7.1
 astor==0.8.0
+cycler==0.10.0
 Cython==0.29.9
+future==0.17.1
 gast==0.2.2
 grpcio==1.21.1
 h5py==2.9.0
+iso8601==0.1.12
 joblib==0.13.2
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.0
+kiwisolver==1.1.0
 Markdown==3.1.1
+matplotlib==3.1.0
 mock==3.0.5
 numpy==1.16.4
 pandas==0.24.2
 protobuf==3.8.0
+pyparsing==2.4.0
+pyserial==3.4
 python-dateutil==2.8.0
 pytz==2019.1
+PyYAML==5.1.1
 scikit-learn==0.21.2
 scipy==1.3.0
+serial==0.0.97
 six==1.12.0
 sklearn==0.0
 tensorboard==1.13.1
@@ -77,7 +93,13 @@ termcolor==1.1.0
 Werkzeug==0.15.4
 ```
 
-### Arduino Nano:
+### Arduino:
+**system**
+```
+Arduino Uno R2
+ATMega328P-PU
+```
+
 **system**
 ```
 C-Control Nano
