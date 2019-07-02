@@ -15,13 +15,15 @@ import datetime
 import sys, os
 
 #####	Define and start serial communication
-ser = serial.Serial('/dev/ttyACM0', 56600)
+ser = serial.Serial('/dev/ttyACM0', 57600)
 
 
 n_len = 4000
 data = np.zeros((n_len,2),dtype=int)
 
 ir = 0
+
+ser.write(bytes('S', "utf8"))
 
 #####	Main loop start
 while True:
@@ -36,6 +38,7 @@ while True:
 		data[-1,1] = value
 		ir = ir+1
 		if ir == n_len:
+			ser.write(bytes('T',"utf8"))
 			print('Saving')	
 			np.savetxt('test.dat',data,fmt='%d',delimiter=',')
 			print('Saved')
