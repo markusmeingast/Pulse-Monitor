@@ -38,6 +38,11 @@ Added KY039HS pulse sensor to replace EZ1. Additional code development.
  - Added initial plotting tool for saved test data
  - Added sensor documentation
 
+## 02.07.2019
+Added start/stop commands to UNO ("S" Start, "T" Terminate).
+ - Switched to 3.3V supply on sensor. resolution seems far better.
+ - Switched to Arduino IDE 1.8.9 for serial plotting support.
+
 ## Open Topics / Concept issues
  - Serial read frequency (DAQ and transfer should be min ~50Hz)
  - Tensorflow lite model transfer (CPU/GPU --> ARM)
@@ -109,4 +114,6 @@ ATMega328
 **Arduino  IDE**
 ```
 2:1.0.5+dfsg2-4.1
+1.8.9 local
+
 ```
