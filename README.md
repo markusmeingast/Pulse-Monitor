@@ -1,4 +1,4 @@
-# pulse-monitor
+# PULSE-MONITOR
 Concept work for a heart beat monitor to determine intermittent arrhythmia. 
 
 # Basic concept:
@@ -8,7 +8,7 @@ A prediction model will be built using tensorflow RNN, e.g. LSTM cells, based on
 
 The main challenges are the following:
 
- - [ ] Data acquisition concept
+ - [X] Data acquisition concept
  - [ ] Automatic data splitting into single or multiple beats
  - [ ] Model training in tensorflow
  - [ ] Model translation for live interpretation (e.g. tflite)
@@ -16,8 +16,12 @@ The main challenges are the following:
 Currently three scenarios are envisioned.
 
  1. DAQ runs through a Arduino Nano, routing data by serial to Raspberry Pi for splitting, processing and storing.
- 1. DAQ runs directly through the Raspberry Pi by means of GPIO, effectively removing the Nano fromt he chain.
- 1. DAQ and processing run through the Nano, with dedicated SD storage extension shield.
+ 1. ~~DAQ runs directly through the Raspberry Pi by means of GPIO, effectively removing the Nano fromt he~~ chain.
+ 1. ~~DAQ and processing run through the Nano, with dedicated SD storage extension shield.~~
+
+## Latest results
+
+![Signal Example](signal_example.png "Signal Example")
 
 ## 01.06.2019
 Starting basic setup work for Arduino **Nano** (C-Control compatible board) and Raspberry **Pi** 3 B+.
@@ -25,7 +29,7 @@ Starting basic setup work for Arduino **Nano** (C-Control compatible board) and 
  - Set up python 3.7.3 on Pi
 
 ## 10.06.2019
-Set up basic serial communication between Arduino (Uno for testing purposes) and Pi.
+Set up basic serial communication between Arduino **Uno** (for testing/prototyping purposes) and Pi.
  - Restructured project folder
  - Using EZ1-Range Finder sensor for testing
  - Implemented try/catch on Pi side to limit communcation issues... further testing and development needed
@@ -50,7 +54,8 @@ Facing some issues getting the serial communication synced and without mistransm
  - Saving files according to start date and time
 
 ## Open Topics / Concept issues
- - Serial read frequency (DAQ and transfer should be min ~50Hz)
+ - ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
+ - Unstable/nonrobust serial communication between Pi and Uno
  - Tensorflow lite model transfer (CPU/GPU --> ARM)
  - Sensor setup on PI/Nano
  - Beat splitting method
@@ -121,5 +126,4 @@ ATMega328
 ```
 2:1.0.5+dfsg2-4.1
 1.8.9 local
-
 ```
