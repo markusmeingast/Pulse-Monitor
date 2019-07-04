@@ -43,6 +43,12 @@ Added start/stop commands to UNO ("S" Start, "T" Terminate).
  - Switched to 3.3V supply on sensor. resolution seems far better.
  - Switched to Arduino IDE 1.8.9 for serial plotting support.
 
+## 04.07.2019
+Facing some issues getting the serial communication synced and without mistransmissions.
+ - Play around with ser.flush(), time.sleep() and timeout settings.
+ - Added shell script for removing old *.csv files
+ - Saving files according to start date and time
+
 ## Open Topics / Concept issues
  - Serial read frequency (DAQ and transfer should be min ~50Hz)
  - Tensorflow lite model transfer (CPU/GPU --> ARM)

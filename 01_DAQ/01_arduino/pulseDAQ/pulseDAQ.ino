@@ -1,7 +1,7 @@
 /*
 Testing reading raw analog data from sensor. Pulse sensor of type Joy-It (KY039HS) is used.
 Set up:
- - white:   3.3V (better resposne than 5V)
+ - white:  3.3V (better resposne than 5V)
  - gray:   GND
  - black:  SIG (A5)
  
@@ -31,12 +31,14 @@ void loop() {
     // Serial.println(check_status);
     // START RECORDING STATUS
     if (check_status == 'S') {
+      //Serial.print("Starting\n");
       keep_going = 1;
       time_start = micros();
       last_read = micros();
     }
     // STOP RECORDING STATUS
     else if (check_status == 'T') {
+      //Serial.print("Terminating\n");
       keep_going = 0;
     }
   }
@@ -53,7 +55,7 @@ void loop() {
       Serial.print(micros()-time_start-period);
       Serial.print(",");
       Serial.print(sensorValue);
-      Serial.print("\n");
+      Serial.println("");
     }
   }
 }
