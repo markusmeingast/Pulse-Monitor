@@ -53,6 +53,10 @@ Facing some issues getting the serial communication synced and without mistransm
  - Added shell script for removing old *.csv files
  - Saving files according to start date and time
 
+## 08.07.2019
+First 60min recording failed.
+ - Added monitoring print out, and abort saving.
+
 ## Open Topics / Concept issues
  - ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
  - Unstable/nonrobust serial communication between Pi and Uno
