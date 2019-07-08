@@ -17,7 +17,7 @@ import sys, os
 import time
 
 #####	Define and start serial communication
-ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.2)
+ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.3)
 
 #####	Check if serial communcation is open
 if ser.isOpen():
@@ -26,7 +26,7 @@ else:
 	print('Serial communication error: wrong port/baudrate?')
 
 #####	Initialize empty array (rel. time, value)
-n_len = 1000
+n_len = 72000
 data = np.zeros((n_len,2),dtype=int)
 
 #####	Initialize file name for saving
@@ -52,17 +52,23 @@ while ir < n_len:
 		data[-1,0] = time
 		data[-1,1] = value
 		ir = ir+1
+		if ir%1000==0:
+			print(str(ir)+' samples taken with '+str(n_err)+' errors')
 
 	#####	Cancel loop by keyboard interrupt
 	except KeyboardInterrupt:
 		print("Stopping due to user abort\n")
 		ser.write(bytes('T',"utf8"))
 		ser.close()
+		np.savetxt('abort.csv',data,fmt='%d',delimiter=',')
+		print('Saved abort.csv after '+str(ir)+'steps')
 		exit()
 
 	#####	Skip read if issues (may require fillers for further data processing)
 	except:
 		n_err = n_err+1
+		if n_err%100==0:
+			print('Significant number of errors:'+str(n_err))
 		pass
 
 
