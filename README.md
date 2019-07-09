@@ -57,6 +57,12 @@ Facing some issues getting the serial communication synced and without mistransm
 First 60min recording failed.
  - Added monitoring print out, and abort saving.
 
+## 09.07.2019
+Second attempt at reading 60min. Failed at around 2150s (from 3600s). Needs further debugging/file splitting.
+ - Started development notebook.
+ - Rolling mean (5-window) reduces noise significantly.
+ - Peak finding can be tested on data set.
+
 ## Open Topics / Concept issues
  - ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
  - Unstable/nonrobust serial communication between Pi and Uno

@@ -17,27 +17,37 @@ import sys, os
 import time
 
 #####	Define and start serial communication
-ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.3)
+try:
+	ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.2)
+except:
+	print('Please check the port.')
 
 #####	Check if serial communcation is open
 if ser.isOpen():
 	print('Serial communication is up!')
 else:
 	print('Serial communication error: wrong port/baudrate?')
+	exit()
 
 #####	Initialize empty array (rel. time, value)
-n_len = 72000
+n_len = 720000
 data = np.zeros((n_len,2),dtype=int)
 
 #####	Initialize file name for saving
 fname = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
 
 #####	Send start command to UNO
-print('Start recording for '+fname+' for '+str(n_len/200)+'s or ~'+str(n_len)+'samples')
-ser.write(bytes('S', "utf8"))
-ser.flush()
+print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
+ser.write(bytes('R','utf-8'))
 
 #####	Main loop start
+#####	Skip first 20 reads
+ir = 0
+while ir < 20:
+	ser.readline()
+	ir = ir+1
+
+#####	Start reading/decoding/writing to file
 ir = 0
 n_err = 0
 while ir < n_len:
@@ -48,9 +58,9 @@ while ir < n_len:
 		time,value = ser.readline().decode().strip().split(",")
 		time = int(time)
 		value = int(value)
-		data = np.roll(data,-1,axis=0)
-		data[-1,0] = time
-		data[-1,1] = value
+		#data = np.roll(data,-1,axis=0)   <-- way too slow
+		data[ir,0] = time
+		data[ir,1] = value
 		ir = ir+1
 		if ir%1000==0:
 			print(str(ir)+' samples taken with '+str(n_err)+' errors')
@@ -58,23 +68,21 @@ while ir < n_len:
 	#####	Cancel loop by keyboard interrupt
 	except KeyboardInterrupt:
 		print("Stopping due to user abort\n")
-		ser.write(bytes('T',"utf8"))
 		ser.close()
 		np.savetxt('abort.csv',data,fmt='%d',delimiter=',')
-		print('Saved abort.csv after '+str(ir)+'steps')
+		print('Saved abort.csv after '+str(ir)+' steps')
 		exit()
 
 	#####	Skip read if issues (may require fillers for further data processing)
 	except:
 		n_err = n_err+1
-		if n_err%100==0:
+		if n_err%20==0:
 			print('Significant number of errors:'+str(n_err))
 		pass
 
 
 #####	Send terminate command to UNO
 print('Terminate recording for '+fname+' with '+str(n_err)+' errors')
-ser.write(bytes('T',"utf8"))
 ser.close()
 
 #####	Save to file
