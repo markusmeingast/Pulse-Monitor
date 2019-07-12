@@ -63,6 +63,12 @@ Second attempt at reading 60min. Failed at around 2150s (from 3600s). Needs furt
  - Rolling mean (5-window) reduces noise significantly.
  - Peak finding can be tested on data set.
 
+## 12.07.2019
+Attached AD8232 ECG sensor as an alternative to KY039. 
+ - Basic setup based on [Sparkfun guide](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/all)
+ - Switched to 57600baud for consistency.
+ - Reduced to 200Hz DAQ
+
 ## Open Topics / Concept issues
  - ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
  - Unstable/nonrobust serial communication between Pi and Uno

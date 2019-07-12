@@ -13,7 +13,7 @@ Features:
 //  INIT VARIABLES
 unsigned long time_start;
 const unsigned long period = 5000; // 5000us : 200Hz
-static unsigned long last_read;
+unsigned long last_read;
 char check_status;
 
 //  SET UP LOOP
@@ -43,8 +43,8 @@ void loop() {
     int sensorValue = analogRead(A5);
       
     // print out time and value:
-    Serial.print(micros()-time_start-period);
-    Serial.print(",");
+    //Serial.print(micros()-time_start-period);
+    //Serial.print(",");
     Serial.print(sensorValue);
     Serial.println("");
   }
