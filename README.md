@@ -8,16 +8,16 @@ A prediction model will be built using tensorflow RNN, e.g. LSTM cells, based on
 
 The main challenges are the following:
 
- [X] Data acquisition concept
- [ ] Automatic data splitting into single or multiple beats
- [ ] Model training in tensorflow
- [ ] Model translation for live interpretation (e.g. tflite)
+[X] Data acquisition concept
+[ ] Automatic data splitting into single or multiple beats
+[ ] Model training in tensorflow
+[ ] Model translation for live interpretation (e.g. tflite)
 
 Currently three scenarios are envisioned.
 
- 1. DAQ runs through a Arduino Nano, routing data by serial to Raspberry Pi for splitting, processing and storing.
- 1. ~~DAQ runs directly through the Raspberry Pi by means of GPIO, effectively removing the Nano fromt he~~ chain.
- 1. ~~DAQ and processing run through the Nano, with dedicated SD storage extension shield.~~
+1. DAQ runs through a Arduino Nano, routing data by serial to Raspberry Pi for splitting, processing and storing.
+1. ~~DAQ runs directly through the Raspberry Pi by means of GPIO, effectively removing the Nano fromt he~~ chain.
+1. ~~DAQ and processing run through the Nano, with dedicated SD storage extension shield.~~
 
 ## Latest results
 
@@ -25,65 +25,65 @@ Currently three scenarios are envisioned.
 
 ## 01.06.2019
 Starting basic setup work for Arduino **Nano** (C-Control compatible board) and Raspberry **Pi** 3 B+.
- * Added "blink" example as placeholder to Nano
- * Set up python 3.7.3 on Pi
+* Added "blink" example as placeholder to Nano
+* Set up python 3.7.3 on Pi
 
 ## 10.06.2019
 Set up basic serial communication between Arduino **Uno** (for testing/prototyping purposes) and Pi.
- * Restructured project folder
- * Using EZ1-Range Finder sensor for testing
- * Implemented try/catch on Pi side to limit communcation issues... further testing and development needed
- * Set sampling frequnecy to 50Hz
+* Restructured project folder
+* Using EZ1-Range Finder sensor for testing
+* Implemented try/catch on Pi side to limit communcation issues... further testing and development needed
+* Set sampling frequnecy to 50Hz
 
 ## 22.06.2019
 Added KY039HS pulse sensor to replace EZ1. Additional code development.
- * Ramped sampling rate up tp 200Hz
- * Ramped up serial baud rate to 56.6k
- * Added initial plotting tool for saved test data
- * Added sensor documentation
+* Ramped sampling rate up tp 200Hz
+* Ramped up serial baud rate to 56.6k
+* Added initial plotting tool for saved test data
+* Added sensor documentation
 
 ## 02.07.2019
 Added start/stop commands to UNO ("S" Start, "T" Terminate).
- * Switched to 3.3V supply on sensor. resolution seems far better.
- * Switched to Arduino IDE 1.8.9 for serial plotting support.
+* Switched to 3.3V supply on sensor. resolution seems far better.
+* Switched to Arduino IDE 1.8.9 for serial plotting support.
 
 ## 04.07.2019
 Facing some issues getting the serial communication synced and without mistransmissions.
- * Play around with ser.flush(), time.sleep() and timeout settings.
- * Added shell script for removing old *.csv files
- * Saving files according to start date and time
+* Play around with ser.flush(), time.sleep() and timeout settings.
+* Added shell script for removing old *.csv files
+* Saving files according to start date and time
 
 ## 08.07.2019
 First 60min recording failed.
- * Added monitoring print out, and abort saving.
+* Added monitoring print out, and abort saving.
 
 ## 09.07.2019
 Second attempt at reading 60min. Failed at around 2150s (from 3600s). Needs further debugging/file splitting.
- * Started development notebook.
- * Rolling mean (5-window) reduces noise significantly.
- * Peak finding can be tested on data set.
+* Started development notebook.
+* Rolling mean (5-window) reduces noise significantly.
+* Peak finding can be tested on data set.
 
 ## 12.07.2019
 Attached AD8232 ECG sensor as an alternative to KY039. 
- * Basic setup based on [Sparkfun guide](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/all).
-  * Yellow: left arm
-  * Red: right arm
-  * Green: left leg
- * Switched to 57600baud for consistency.
- * Reduced to 200Hz DAQ
- * STRONG interference of 50Hz from TV/monitor... may require shielding?
- * AD8232 requires time to recenter, may not be feasible for being active?
- * Nano has issues uploading
- * Micro shows same 50Hz issue
- * Recorded heart beat event! (20190712-161609 @ ~72s)
+* Basic setup based on [Sparkfun guide](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/all).
+ * Yellow: left arm
+ * Red: right arm
+ * Green: left leg
+* Switched to 57600baud for consistency.
+* Reduced to 200Hz DAQ
+* STRONG interference of 50Hz from TV/monitor... may require shielding?
+* AD8232 requires time to recenter, may not be feasible for being active?
+* Nano has issues uploading
+* Micro shows same 50Hz issue
+* Recorded heart beat event! (20190712-161609 @ ~72s)
 
 ## Open Topics / Concept issues
- * ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
- * Unstable/nonrobust serial communication between Pi and Uno
- * Tensorflow lite model transfer (CPU/GPU --> ARM)
- * Sensor setup on PI/Nano
- * Beat splitting method
- * Buffering
+* ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
+* Unstable/nonrobust serial communication between Pi and Uno
+* Tensorflow lite model transfer (CPU/GPU --> ARM)
+* Sensor setup on PI/Nano
+* Beat splitting method
+* Buffering
 
 ## Software build versioning
 
