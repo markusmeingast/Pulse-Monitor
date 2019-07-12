@@ -30,7 +30,7 @@ else:
 	exit()
 
 #####	Initialize empty array (rel. time, value)
-n_len = 720000
+n_len = 30000
 data = np.zeros((n_len,2),dtype=int)
 
 #####	Initialize file name for saving

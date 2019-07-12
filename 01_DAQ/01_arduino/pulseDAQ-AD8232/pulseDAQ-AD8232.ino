@@ -24,8 +24,11 @@ local pub, and you've found our code helpful, please buy us a round!
 Distributed as-is; no warranty is given.
 ******************************************************************************/
 
-static unsigned long last_read;
+//  INIT VARIABLES
+unsigned long time_start;
 const unsigned long period = 5000; // 5000us : 200Hz
+unsigned long last_read;
+char check_status;
 
 void setup() {
   // initialize the serial communication:
@@ -36,17 +39,35 @@ void setup() {
 }
 
 void loop() {
-  
-  if((digitalRead(10) == 1)||(digitalRead(11) == 1)){
-    Serial.println('!');
-  }
-  else{
-    if (micros() - last_read >= period) {
-      last_read += period;
-      // send the value of analog input 0:
-      Serial.println(analogRead(A0));
+
+  // CHECK FOR STATUS MESSAGE
+  if (Serial.available()>0) {
+    check_status = Serial.read();
+    // Serial.println(check_status);
+    // RESET TIME
+    if (check_status == 'R') {
+      //Serial.print("Resetting\n");
+      time_start = micros();
+      last_read = micros();
     }
   }
+
+  
+  //if((digitalRead(10) == 1)||(digitalRead(11) == 1)){
+  //  Serial.println('!');
+  //}
+  //else{
+  if (micros() - last_read >= period) {
+    last_read += period;
+    // send the value of analog input 0:
+    // Serial.println(analogRead(A0));
+    // print out time and value:
+    Serial.print(micros()-time_start-period);
+    Serial.print(",");
+    Serial.print(analogRead(A0));
+    Serial.println("");
+  }
+  //}
   //Wait for a bit to keep serial data from saturating
   //delay(1);
 }
