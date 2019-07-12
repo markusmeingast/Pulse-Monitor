@@ -8,10 +8,10 @@ A prediction model will be built using tensorflow RNN, e.g. LSTM cells, based on
 
 The main challenges are the following:
 
-[X] Data acquisition concept
-[ ] Automatic data splitting into single or multiple beats
-[ ] Model training in tensorflow
-[ ] Model translation for live interpretation (e.g. tflite)
+- [X] Data acquisition concept
+- [ ] Automatic data splitting into single or multiple beats
+- [ ] Model training in tensorflow
+- [ ] Model translation for live interpretation (e.g. tflite)
 
 Currently three scenarios are envisioned.
 
@@ -78,7 +78,7 @@ Attached AD8232 ECG sensor as an alternative to KY039.
 * Recorded heart beat event! (20190712-161609 @ ~72s)
 
 ## Open Topics / Concept issues
-* ~~Serial read frequency (DAQ and transfer should be min ~50Hz)~~
+* <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * Unstable/nonrobust serial communication between Pi and Uno
 * Tensorflow lite model transfer (CPU/GPU --> ARM)
 * Sensor setup on PI/Nano
