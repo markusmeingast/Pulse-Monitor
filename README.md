@@ -77,6 +77,11 @@ Attached AD8232 ECG sensor as an alternative to KY039.
 * Micro shows same 50Hz issue
 * Recorded heart beat event! (20190712-161609 @ ~72s)
 
+## 15.07.2019
+First peak detection started for further processing.
+* Fixed arduino code to start recording at ~0s (flush and delay)
+* Included peak detection concept in notebook
+
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * Unstable/nonrobust serial communication between Pi and Uno
