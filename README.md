@@ -82,6 +82,12 @@ First peak detection started for further processing.
 * Fixed arduino code to start recording at ~0s (flush and delay)
 * Included peak detection concept in notebook
 
+## 16.07.2019
+Second try at long term monitoring. Recorded 2x 35min, but without writing out file. Manual separation in abort.csv worked.
+* Clean signals for about 70min total
+* Manual cleaning still required
+* Will try breaking files into 10min increments
+
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * Unstable/nonrobust serial communication between Pi and Uno

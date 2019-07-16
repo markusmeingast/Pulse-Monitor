@@ -29,66 +29,72 @@ else:
 	print('Serial communication error: wrong port/baudrate?')
 	exit()
 
-#####	Initialize empty array (rel. time, value)
-n_len = 30000
-data = np.zeros((n_len,2),dtype=int)
+#####	SETUP TIME
+print('5min to set up, staring now')
+time.sleep(300)
 
-#####	Initialize file name for saving
-fname = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+#####	START LOOP OVER MULTIPLE INTERVALS
+for tt in range(0,5):
 
-#####	Send start command to UNO
-print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
-ser.write(bytes('R','utf-8'))
+	#####	Initialize empty array (rel. time, value)
+	n_len = 300000
+	data = np.zeros((n_len,2),dtype=int)
 
-#####	Main loop start
-#####	Skip first 20 reads
-ir = 0
-while ir < 20:
-	ser.readline()
-	ir = ir+1
+	#####	Initialize file name for saving
+	fname = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
 
-#####	Start reading/decoding/writing to file
-ir = 0
-n_err = 0
-while ir < n_len:
-	#print(ir,n_err)
-	#####	Implemented try/except to avoid read/write/measurement issues in serial
-	try:
-		#####	Grab time stamp from micros() and measured value
-		time,value = ser.readline().decode().strip().split(",")
-		time = int(time)
-		value = int(value)
-		#data = np.roll(data,-1,axis=0)   <-- way too slow
-		data[ir,0] = time
-		data[ir,1] = value
+	#####	Send start command to UNO
+	print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
+	ser.write(bytes('R','utf-8'))
+
+	#####	Main loop start
+	#####	Skip first 20 reads
+	ir = 0
+	while ir < 20:
+		ser.readline()
 		ir = ir+1
-		if ir%1000==0:
-			print(str(ir)+' samples taken with '+str(n_err)+' errors')
 
-	#####	Cancel loop by keyboard interrupt
-	except KeyboardInterrupt:
-		print("Stopping due to user abort\n")
-		ser.close()
-		np.savetxt('abort.csv',data,fmt='%d',delimiter=',')
-		print('Saved abort.csv after '+str(ir)+' steps')
-		exit()
+	#####	Start reading/decoding/writing to file
+	ir = 0
+	n_err = 0
+	while ir < n_len:
+		#print(ir,n_err)
+		#####	Implemented try/except to avoid read/write/measurement issues in serial
+		try:
+			#####	Grab time stamp from micros() and measured value
+			time,value = ser.readline().decode().strip().split(",")
+			time = int(time)
+			value = int(value)
+			#data = np.roll(data,-1,axis=0)   <-- way too slow
+			data[ir,0] = time
+			data[ir,1] = value
+			ir = ir+1
+			if ir%1000==0:
+				print(str(ir)+' samples taken with '+str(n_err)+' errors')
 
-	#####	Skip read if issues (may require fillers for further data processing)
-	except:
-		n_err = n_err+1
-		if n_err%20==0:
-			print('Significant number of errors:'+str(n_err))
-		pass
+		#####	Cancel loop by keyboard interrupt
+		except KeyboardInterrupt:
+			print("Stopping due to user abort\n")
+			ser.close()
+			np.savetxt('abort.csv',data,fmt='%d',delimiter=',')
+			print('Saved abort.csv after '+str(ir)+' steps')
+			exit()
+
+		#####	Skip read if issues (may require fillers for further data processing)
+		except:
+			n_err = n_err+1
+			if n_err%20==0:
+				print('Significant number of errors:'+str(n_err))
+			pass
 
 
-#####	Send terminate command to UNO
-print('Terminate recording for '+fname+' with '+str(n_err)+' errors')
+	#####	Send terminate command to UNO
+	print('Terminate recording for '+fname+' with '+str(n_err)+' errors')
+
+	#####	Save to file
+	np.savetxt(fname+'.csv',data,fmt='%d',delimiter=',')
+	print('Saved '+fname+'.csv')
+
 ser.close()
-
-#####	Save to file
-np.savetxt(fname+'.csv',data,fmt='%d',delimiter=',')
-print('Saved '+fname+'.csv')
 exit()
-
-
 
