@@ -86,7 +86,7 @@ First peak detection started for further processing.
 Second try at long term monitoring. Recorded 2x 35min, but without writing out file. Manual separation in abort.csv worked.
 * Clean signals for about 70min total
 * Manual cleaning still required
-* Will try breaking files into 10min increments
+* Will try breaking files into 10min increments --> seems to work, recorded 2x 10min. Trying more tomorrow
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>

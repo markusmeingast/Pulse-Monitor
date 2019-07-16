@@ -19,6 +19,7 @@ import time
 #####	Define and start serial communication
 try:
 	ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.2)
+	time.sleep(0.1)
 except:
 	print('Please check the port.')
 
@@ -34,10 +35,10 @@ print('5min to set up, staring now')
 time.sleep(300)
 
 #####	START LOOP OVER MULTIPLE INTERVALS
-for tt in range(0,5):
+for tt in range(0,6):
 
 	#####	Initialize empty array (rel. time, value)
-	n_len = 300000
+	n_len = 120000
 	data = np.zeros((n_len,2),dtype=int)
 
 	#####	Initialize file name for saving
@@ -45,7 +46,9 @@ for tt in range(0,5):
 
 	#####	Send start command to UNO
 	print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
+	ser.flushOutput()
 	ser.write(bytes('R','utf-8'))
+	ser.flushInput()
 
 	#####	Main loop start
 	#####	Skip first 20 reads
@@ -62,11 +65,11 @@ for tt in range(0,5):
 		#####	Implemented try/except to avoid read/write/measurement issues in serial
 		try:
 			#####	Grab time stamp from micros() and measured value
-			time,value = ser.readline().decode().strip().split(",")
-			time = int(time)
+			t,value = ser.readline().decode().strip().split(",")
+			t = int(t)
 			value = int(value)
 			#data = np.roll(data,-1,axis=0)   <-- way too slow
-			data[ir,0] = time
+			data[ir,0] = t
 			data[ir,1] = value
 			ir = ir+1
 			if ir%1000==0:
