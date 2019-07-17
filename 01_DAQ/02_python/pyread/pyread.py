@@ -16,10 +16,13 @@ import datetime
 import sys, os
 import time
 
+#####	SETUP TIME
+print('5min to set up, starting now')
+time.sleep(300)
+
 #####	Define and start serial communication
 try:
 	ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.2)
-	time.sleep(0.1)
 except:
 	print('Please check the port.')
 
@@ -30,12 +33,8 @@ else:
 	print('Serial communication error: wrong port/baudrate?')
 	exit()
 
-#####	SETUP TIME
-print('5min to set up, staring now')
-time.sleep(300)
-
 #####	START LOOP OVER MULTIPLE INTERVALS
-for tt in range(0,6):
+for tt in range(0,2):
 
 	#####	Initialize empty array (rel. time, value)
 	n_len = 120000
@@ -46,22 +45,15 @@ for tt in range(0,6):
 
 	#####	Send start command to UNO
 	print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
-	ser.flushOutput()
-	ser.write(bytes('R','utf-8'))
-	ser.flushInput()
 
-	#####	Main loop start
-	#####	Skip first 20 reads
-	ir = 0
-	while ir < 20:
+	#####	Skipping first 200 rows
+	for i in range(0,200):
 		ser.readline()
-		ir = ir+1
 
 	#####	Start reading/decoding/writing to file
 	ir = 0
 	n_err = 0
 	while ir < n_len:
-		#print(ir,n_err)
 		#####	Implemented try/except to avoid read/write/measurement issues in serial
 		try:
 			#####	Grab time stamp from micros() and measured value

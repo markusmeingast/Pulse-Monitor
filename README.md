@@ -88,6 +88,11 @@ Second try at long term monitoring. Recorded 2x 35min, but without writing out f
 * Manual cleaning still required
 * Will try breaking files into 10min increments --> seems to work, recorded 2x 10min. Trying more tomorrow
 
+## 17.07.2019
+Time stamp reset seems too buggy, has been removed. 
+* Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.
+* Recorded 2x 10min with millis(). Signals good, no issues. More data needed for now.
+
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * Unstable/nonrobust serial communication between Pi and Uno
