@@ -3,25 +3,24 @@
 //  Issues:
 //    * no time stamp reset
 //    * micros() rolls over at ~71min, millis() may not be accurate enough?
+//    * implemented rollover check with switching to next_read
 //
 //####################################################################################################
 
-
-
-unsigned long last_read;
-//const unsigned long period = 5000; // 5000us : 200Hz <-- for micros()
-const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
+unsigned long period = 10000; // 5000us : 200Hz <-- for micros()
+//const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
+unsigned long next_read;
 
 void setup() {
   Serial.begin(57600);  
 }
 
 void loop() {
-  if (millis() - last_read >= period) {
-    last_read += period;
-    Serial.print(millis());
+  if ((micros() >= next_read) && (micros()-next_read < 2*period)) {
+    Serial.print(micros());
     Serial.print(",");
-    Serial.println(analogRead(A0));  
+    Serial.println(analogRead(A0));
+    next_read += period;
   }
 }
 

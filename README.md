@@ -90,12 +90,14 @@ Second try at long term monitoring. Recorded 2x 35min, but without writing out f
 
 ## 17.07.2019
 Time stamp reset seems too buggy, has been removed. 
-* Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.
-* Recorded 2x 10min with millis(). Signals good, no issues. More data needed for now.
+* <del>Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.</del>
+* Recorded 2x 10min with millis(). Signals good, no significant issues. Time stamp may be of by 10% though...
 * Recorded additional 6x 10min. Some interference seems present. Possibly be cell phone?
+* Fixed micros() with roll over, by siwtching to next_read and delta checking. Seems feasible.
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
+* Time stamp reset / roll-over check?
 * Unstable/nonrobust serial communication between Pi and Uno
 * Tensorflow lite model transfer (CPU/GPU --> ARM)
 * Sensor setup on PI/Nano
@@ -116,30 +118,65 @@ Kernel 4.19.42-v7+
 ```
 absl-py==0.7.1
 astor==0.8.0
+attrs==19.1.0
+backcall==0.1.0
+bleach==3.1.0
 cycler==0.10.0
 Cython==0.29.9
+decorator==4.4.0
+defusedxml==0.6.0
+entrypoints==0.3
 future==0.17.1
 gast==0.2.2
 grpcio==1.21.1
 h5py==2.9.0
+ipykernel==5.1.1
+ipython==7.6.1
+ipython-genutils==0.2.0
+ipywidgets==7.5.0
 iso8601==0.1.12
+jedi==0.14.0
+Jinja2==2.10.1
 joblib==0.13.2
+jsonschema==3.0.1
+jupyter==1.0.0
+jupyter-client==5.3.0
+jupyter-console==6.0.0
+jupyter-core==4.5.0
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.0
 kiwisolver==1.1.0
 Markdown==3.1.1
+MarkupSafe==1.1.1
 matplotlib==3.1.0
+mistune==0.8.4
 mock==3.0.5
+nbconvert==5.5.0
+nbformat==4.4.0
+notebook==5.7.8
 numpy==1.16.4
 pandas==0.24.2
+pandocfilters==1.4.2
+parso==0.5.0
+PeakUtils==1.3.2
+pexpect==4.7.0
+pickleshare==0.7.5
+prometheus-client==0.7.1
+prompt-toolkit==2.0.9
 protobuf==3.8.0
+ptyprocess==0.6.0
+Pygments==2.4.2
 pyparsing==2.4.0
+pyrsistent==0.15.3
 pyserial==3.4
 python-dateutil==2.8.0
 pytz==2019.1
 PyYAML==5.1.1
+pyzmq==18.0.2
+qtconsole==4.5.1
 scikit-learn==0.21.2
 scipy==1.3.0
+Send2Trash==1.5.0
 serial==0.0.97
 six==1.12.0
 sklearn==0.0
@@ -147,7 +184,14 @@ tensorboard==1.13.1
 tensorflow==1.13.1
 tensorflow-estimator==1.13.0
 termcolor==1.1.0
+terminado==0.8.2
+testpath==0.4.2
+tornado==6.0.3
+traitlets==4.3.2
+wcwidth==0.1.7
+webencodings==0.5.1
 Werkzeug==0.15.4
+widgetsnbextension==3.5.0
 ```
 
 ### Arduino:
