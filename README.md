@@ -92,6 +92,7 @@ Second try at long term monitoring. Recorded 2x 35min, but without writing out f
 Time stamp reset seems too buggy, has been removed. 
 * Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.
 * Recorded 2x 10min with millis(). Signals good, no issues. More data needed for now.
+* Recorded additional 6x 10min. Some interference seems present. Possibly be cell phone?
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>

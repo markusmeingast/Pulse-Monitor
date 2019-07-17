@@ -34,7 +34,7 @@ else:
 	exit()
 
 #####	START LOOP OVER MULTIPLE INTERVALS
-for tt in range(0,2):
+for tt in range(0,6):
 
 	#####	Initialize empty array (rel. time, value)
 	n_len = 120000
