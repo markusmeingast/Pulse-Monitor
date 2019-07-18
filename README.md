@@ -9,7 +9,7 @@ A prediction model will be built using tensorflow RNN, e.g. LSTM cells, based on
 The main challenges are the following:
 
 - [X] Data acquisition concept
-- [ ] Automatic data splitting into single or multiple beats
+- [X] Automatic data splitting into single or multiple beats
 - [ ] Model training in tensorflow
 - [ ] Model translation for live interpretation (e.g. tflite)
 
@@ -93,16 +93,26 @@ Time stamp reset seems too buggy, has been removed.
 * <del>Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.</del>
 * Recorded 2x 10min with millis(). Signals good, no significant issues. Time stamp may be of by 10% though...
 * Recorded additional 6x 10min. Some interference seems present. Possibly be cell phone?
-* Fixed micros() with roll over, by siwtching to next_read and delta checking. Seems feasible.
+* Fixed micros() with roll over, by switching to next_read and delta checking. Seems feasible. Will ignore time-stamp except for frequency checking and consistency.
+
+## 18.07.2019
+Further development of processing chain.
+* Peak detection works on other data as well.
+* Splitting tested for peak+70samples (~0.35s) at resting heart rate.
+* Splitting could potentially be improved at bottom peak, e.g. lowest peak ~40-80 samples after highest peak.
+* <del>Moved min_dist from 50 to 80 to capture event at 20190712-161609 @ ~72s. Need more events!!!</del>
+* Prepared all of the up-to-now recorded data into single peak samples (~7400). First ML RNN model can be fed with this.
+* Second event found at 20190717-121646 @ 164s
+* Combine events with following peak for consistency? Following peak strongly influenced in length by event using 70 sample cut. Keeping as is for now for first testing.
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
-* Time stamp reset / roll-over check?
+* <del>Time stamp reset / roll-over check?</del>
 * Unstable/nonrobust serial communication between Pi and Uno
 * Tensorflow lite model transfer (CPU/GPU --> ARM)
-* Sensor setup on PI/Nano
-* Beat splitting method
-* Buffering
+* <del>Sensor setup on PI/Nano</del>
+* Beat splitting method, may need improvement
+* <del>Buffering</del>
 
 ## Software build versioning
 

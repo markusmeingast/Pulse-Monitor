@@ -3,11 +3,11 @@
 //  Issues:
 //    * no time stamp reset
 //    * micros() rolls over at ~71min, millis() may not be accurate enough?
-//    * implemented rollover check with switching to next_read
+//    * implemented rollover check with switching to next_read, micros() should be fine for sample rate, and time stamp to be writen out as is, rollover possible.
 //
 //####################################################################################################
 
-unsigned long period = 10000; // 5000us : 200Hz <-- for micros()
+unsigned long period = 5000; // 5000us : 200Hz <-- for micros()
 //const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
 unsigned long next_read;
 
