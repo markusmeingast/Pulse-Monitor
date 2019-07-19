@@ -4,11 +4,13 @@
 #
 #	Python script to interface with Arduino running pulseDAQ
 #	Assuming 200Hz sampling frequency
+#	Running at 57600 baud/s
+#	Recording n intervals of 10min (command specified)
+#	Arduino reset (i.e. micros() close to 0) for each interval
 #
 ####################################################################################################
 
 #####	Import packages
-
 import serial
 import numpy as np
 import matplotlib.pyplot as mp
@@ -16,12 +18,19 @@ import datetime
 import sys, os
 import time
 
-#####	SETUP TIME
+#####	Check if call is correct
+if len(sys.argv)<2:
+	print('Call with: pyread.py <intervals of 10min>')
+	exit()
+
+#####	Start setup time
 print('5min to set up, starting now')
 time.sleep(300)
 
 #####	Define and start serial communication
 try:
+	#####	57600 baud should be sufficient
+	#####	timeout at 0.2s should be enough to capture 200Hz signal while not hanging too long on serial errors.
 	ser = serial.Serial('/dev/ttyACM0', 57600, timeout=0.2)
 except:
 	print('Please check the port.')
@@ -33,11 +42,12 @@ else:
 	print('Serial communication error: wrong port/baudrate?')
 	exit()
 
-#####	START LOOP OVER MULTIPLE INTERVALS
-for tt in range(0,6):
+#####	Start loop over user defined number of intervals at call
+for tt in range(0,int(sys.argv[1])):
 
 	#####	Initialize empty array (rel. time, value)
-	n_len = 120000
+	##### 	1200k samples at 200Hz = 10min
+	n_len = 1200000
 	data = np.zeros((n_len,2),dtype=int)
 
 	#####	Initialize file name for saving
@@ -46,8 +56,14 @@ for tt in range(0,6):
 	#####	Send start command to UNO
 	print('Start recording for '+fname+' for ~'+str(n_len/200)+'s or '+str(n_len)+'samples')
 
-	#####	Skipping first 200 rows
-	for i in range(0,200):
+	#####	Reset arduino by DTR pin
+	ser.setDTR(False)
+	time.sleep(0.022) # <-- supposedly what the UI does, seems to work
+	ser.flushInput()
+	ser.setDTR(True)
+
+	#####	Skip first 5 (empty) rows
+	for i in range(0,5):
 		ser.readline()
 
 	#####	Start reading/decoding/writing to file
@@ -60,7 +76,6 @@ for tt in range(0,6):
 			t,value = ser.readline().decode().strip().split(",")
 			t = int(t)
 			value = int(value)
-			#data = np.roll(data,-1,axis=0)   <-- way too slow
 			data[ir,0] = t
 			data[ir,1] = value
 			ir = ir+1
@@ -90,6 +105,7 @@ for tt in range(0,6):
 	np.savetxt(fname+'.csv',data,fmt='%d',delimiter=',')
 	print('Saved '+fname+'.csv')
 
+#####	Close serial and exit
 ser.close()
 exit()
 

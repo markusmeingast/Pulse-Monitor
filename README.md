@@ -105,6 +105,14 @@ Further development of processing chain.
 * Second event found at 20190717-121646 @ 164s
 * Combine events with following peak for consistency? Following peak strongly influenced in length by event using 70 sample cut. Keeping as is for now for first testing.
 
+## 19.07.2019
+Fixed time stamp rest.
+* Issuing DTR pin reset to Arduino before starting
+* Sleeping for 0.022s, aparently what UI/IDE does as well
+* Skipping first 5 empty rows
+* To be tested with 10min actual measurement
+* Max measurement interval should not exceed ~71min, limiting to segments of 10min should be no issue
+
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * <del>Time stamp reset / roll-over check?</del>
