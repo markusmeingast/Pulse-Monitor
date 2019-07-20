@@ -113,6 +113,9 @@ Fixed time stamp rest.
 * To be tested with 10min actual measurement
 * Max measurement interval should not exceed ~71min, limiting to segments of 10min should be no issue
 
+## 20.08.2019
+Combined available data into training and testing. Should be possible to start training on Google COLAB!
+
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * <del>Time stamp reset / roll-over check?</del>
