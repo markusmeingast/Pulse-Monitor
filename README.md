@@ -115,6 +115,12 @@ Fixed time stamp rest.
 
 ## 20.08.2019
 Combined available data into training and testing. Should be possible to start training on Google COLAB!
+* Moved data to Google Drive for faster access.
+* GPU LSTM works! Setup generally seems fine and visualization makes sense.
+* Normalized data for faster convergence, but can't get below ~46% loss.
+* Alternate idea, use single beat input for single beat target, aligned at righ (peak position the same for all).
+
+![Loss Function](loss_try1.png "Loss Function")
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
