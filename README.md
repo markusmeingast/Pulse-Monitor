@@ -118,17 +118,26 @@ Combined available data into training and testing. Should be possible to start t
 * Moved data to Google Drive for faster access.
 * GPU LSTM works! Setup generally seems fine and visualization makes sense.
 * Normalized data for faster convergence, but can't get below ~46% loss.
-* Alternate idea, use single beat input for single beat target, aligned at righ (peak position the same for all).
+* Alternate idea, use single beat input for single beat target, aligned at right (peak position the same for all).
 
-![Loss Function](loss_try1.png "Loss Function")
+## 22.08.2019
+Reworked test and training sets.
+* Aligned right, with 1 beat input and 1 beat output.
+* Residual loss at ~0.6% at 100 epochs.
+* Prediction on training and testing looks ok, likely needs a lot more data for better loss values.
+* PVC detection as a concept would definitely work!
+
+![Loss Function](1-1-loss.png "Loss Function")
+![Prediction](1-1-prediction.png "Beat Prediction")
+![PVC Detection](PVC-detection.png "PVC Detection")
 
 ## Open Topics / Concept issues
 * <del>Serial read frequency (DAQ and transfer should be min ~50Hz)</del>
 * <del>Time stamp reset / roll-over check?</del>
-* Unstable/nonrobust serial communication between Pi and Uno
+* <del>Unstable/nonrobust serial communication between Pi and Uno</del>
 * Tensorflow lite model transfer (CPU/GPU --> ARM)
 * <del>Sensor setup on PI/Nano</del>
-* Beat splitting method, may need improvement
+* <del>Beat splitting method, may need improvement</del>
 * <del>Buffering</del>
 
 ## Software build versioning
