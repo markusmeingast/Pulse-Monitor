@@ -127,6 +127,12 @@ Reworked test and training sets.
 * Prediction on training and testing looks ok, likely needs a lot more data for better loss values.
 * PVC detection as a concept would definitely work!
 
+## 27.08.2019
+Recording a bit noisey, interference from somewhere...
+* Added status indication LED to arduino. Blue LED on indicates recording.
+* Added self quit after 1000 errors.
+* Recorded 6 x 10min
+
 ![Loss Function](1-1-loss.png "Loss Function")
 ![Prediction](1-1-prediction.png "Beat Prediction")
 ![PVC Detection](PVC-detection.png "PVC Detection")

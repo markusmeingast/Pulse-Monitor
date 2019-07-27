@@ -10,12 +10,23 @@
 unsigned long period = 5000; // 5000us : 200Hz <-- for micros()
 //const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
 unsigned long next_read;
+char ser_read = 'S';
 
 void setup() {
-  Serial.begin(57600);  
+  Serial.begin(57600);
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
+  if (Serial.available()) {
+    ser_read = Serial.read();
+  }
+  if (ser_read == 'R') {
+    digitalWrite(13, HIGH);
+  }
+  else if (ser_read == 'S') {
+    digitalWrite(13, LOW);
+  }
   if ((micros() >= next_read) && (micros()-next_read < 2*period)) {
     Serial.print(micros());
     Serial.print(",");

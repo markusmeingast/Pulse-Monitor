@@ -47,7 +47,7 @@ for tt in range(0,int(sys.argv[1])):
 
 	#####	Initialize empty array (rel. time, value)
 	##### 	1200k samples at 200Hz = 10min
-	n_len = 1200000
+	n_len = 120000
 	data = np.zeros((n_len,2),dtype=int)
 
 	#####	Initialize file name for saving
@@ -65,6 +65,10 @@ for tt in range(0,int(sys.argv[1])):
 	#####	Skip first 5 (empty) rows
 	for i in range(0,5):
 		ser.readline()
+
+	#####	Set LED status to recording
+	time.sleep(0.2)
+	ser.write(bytes('R','utf-8'))
 
 	#####	Start reading/decoding/writing to file
 	ir = 0
@@ -85,6 +89,7 @@ for tt in range(0,int(sys.argv[1])):
 		#####	Cancel loop by keyboard interrupt
 		except KeyboardInterrupt:
 			print("Stopping due to user abort\n")
+			ser.write(bytes('S','utf-8'))
 			ser.close()
 			np.savetxt('abort.csv',data,fmt='%d',delimiter=',')
 			print('Saved abort.csv after '+str(ir)+' steps')
@@ -95,17 +100,25 @@ for tt in range(0,int(sys.argv[1])):
 			n_err = n_err+1
 			if n_err%20==0:
 				print('Significant number of errors:'+str(n_err))
+
+			if n_err>1000:
+				print('Aborting due to too many errors')
+				ser.write(bytes('S','utf-8'))
+				exit()
+
 			pass
 
 
 	#####	Send terminate command to UNO
 	print('Terminate recording for '+fname+' with '+str(n_err)+' errors')
+	ser.write(bytes('S','utf-8'))
 
 	#####	Save to file
 	np.savetxt(fname+'.csv',data,fmt='%d',delimiter=',')
 	print('Saved '+fname+'.csv')
 
 #####	Close serial and exit
+ser.write(bytes('S','utf-8'))
 ser.close()
 exit()
 
