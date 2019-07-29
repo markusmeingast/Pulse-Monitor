@@ -133,6 +133,11 @@ Recording a bit noisey, interference from somewhere...
 * Added self quit after 1000 errors.
 * Recorded 6 x 10min
 
+## 29.08.2019
+Built enclosure for AD8232 and Uno.
+* Adjusted delay to 0.5 after reset for indicator LED
+* Preprocessing data with peak -60 +120 samples fixed length as alternative
+
 ![Loss Function](1-1-loss.png "Loss Function")
 ![Prediction](1-1-prediction.png "Beat Prediction")
 ![PVC Detection](PVC-detection.png "PVC Detection")

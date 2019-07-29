@@ -25,7 +25,7 @@ if len(sys.argv)<2:
 
 #####	Start setup time
 print('5min to set up, starting now')
-time.sleep(300)
+time.sleep(3)
 
 #####	Define and start serial communication
 try:
@@ -47,7 +47,7 @@ for tt in range(0,int(sys.argv[1])):
 
 	#####	Initialize empty array (rel. time, value)
 	##### 	1200k samples at 200Hz = 10min
-	n_len = 120000
+	n_len = 1200
 	data = np.zeros((n_len,2),dtype=int)
 
 	#####	Initialize file name for saving
@@ -67,7 +67,7 @@ for tt in range(0,int(sys.argv[1])):
 		ser.readline()
 
 	#####	Set LED status to recording
-	time.sleep(0.2)
+	time.sleep(0.5)
 	ser.write(bytes('R','utf-8'))
 
 	#####	Start reading/decoding/writing to file
