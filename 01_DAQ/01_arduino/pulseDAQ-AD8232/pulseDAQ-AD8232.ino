@@ -10,6 +10,8 @@
 unsigned long period = 5000; // 5000us : 200Hz <-- for micros()
 //const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
 unsigned long next_read;
+unsigned long micros_;
+unsigned long signal_;
 char ser_read = 'S';
 
 void setup() {
@@ -27,14 +29,16 @@ void loop() {
   else if (ser_read == 'S') {
     digitalWrite(13, LOW);
   }
-  if ((micros() >= next_read) && (micros()-next_read < 2*period)) {
-    Serial.print(micros());
+
+  micros_ = micros();
+  if ((micros_ >= next_read) && (micros_-next_read < 2*period)) {
+    signal_ = analogRead(A0);
+    Serial.print(micros_);
     Serial.print(",");
-    Serial.println(analogRead(A0));
+    Serial.println(signal_);
     next_read += period;
   }
 }
-
 
 ///******************************************************************************
 //Heart_Rate_Display.ino

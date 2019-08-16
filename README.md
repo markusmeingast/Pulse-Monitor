@@ -138,6 +138,22 @@ Built enclosure for AD8232 and Uno.
 * Adjusted delay to 0.5 after reset for indicator LED
 * Preprocessing data with peak -60 +120 samples fixed length as alternative
 
+## 30.08.2019
+Found more events in night session data.
+
+## 16.09.2019
+Tried hooking up 0.96 OLED 1306 screen. Only every second line shows up. Board likely broken (glass chipped in corner).
+* Adjusted Uno code to read signal and time into variables
+
+
+## Event list
+* Event @ 20190712-161609-0077
+* Event @ 20190717-121646-0205
+* Event @ 20190728-021951-0251
+* Event @ 20190728-022955-0116
+* Event @ 20190728-030005-0361
+
+
 ![Loss Function](1-1-loss.png "Loss Function")
 ![Prediction](1-1-prediction.png "Beat Prediction")
 ![PVC Detection](PVC-detection.png "PVC Detection")
