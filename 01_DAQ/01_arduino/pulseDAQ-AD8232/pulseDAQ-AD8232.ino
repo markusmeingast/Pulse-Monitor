@@ -7,16 +7,35 @@
 //
 //####################################################################################################
 
+#include <Adafruit_ST7735.h>
+#include <SPI.h>
+
+#define CS     10
+#define DC      9
+#define RESET   8 
+Adafruit_ST7735 TFTscreen = Adafruit_ST7735(CS, DC, RESET);
+
 unsigned long period = 5000; // 5000us : 200Hz <-- for micros()
 //const unsigned long period = 5; // 5ms : 200Hz <-- for millis()
 unsigned long next_read;
+unsigned long start;
 unsigned long micros_;
-unsigned long signal_;
+int signal_;
+int xpos = 2;
+int yold;
 char ser_read = 'S';
 
 void setup() {
   Serial.begin(57600);
-  pinMode(13, OUTPUT);
+//  TFTscreen.begin();
+  TFTscreen.initR(INITR_BLACKTAB);
+  TFTscreen.setRotation(3);
+  TFTscreen.invertDisplay(1);
+  TFTscreen.fillScreen(ST77XX_BLACK);
+  TFTscreen.drawRect(1, 26 , 159, 80, ST77XX_WHITE);
+  pinMode(7, OUTPUT);
+  next_read = micros();
+  start = next_read;
 }
 
 void loop() {
@@ -24,19 +43,34 @@ void loop() {
     ser_read = Serial.read();
   }
   if (ser_read == 'R') {
-    digitalWrite(13, HIGH);
+    digitalWrite(7, HIGH);
   }
   else if (ser_read == 'S') {
-    digitalWrite(13, LOW);
+    digitalWrite(7, LOW);
   }
 
   micros_ = micros();
   if ((micros_ >= next_read) && (micros_-next_read < 2*period)) {
+    //if((digitalRead(1) == 1)||(digitalRead(2) == 1)){
+    //  Serial.println('!');
+    //}
     signal_ = analogRead(A0);
-    Serial.print(micros_);
+    Serial.print(micros_-start);
     Serial.print(",");
     Serial.println(signal_);
     next_read += period;
+    
+    int ypos = map(signal_,100,700,27,104);
+    if (xpos >= 158) {
+      xpos = 2;
+      TFTscreen.drawLine(xpos, 27, xpos, 104, ST77XX_BLACK);
+    }
+    else {
+      TFTscreen.drawLine(xpos-1, ypos, xpos, yold, ST77XX_WHITE);
+      TFTscreen.drawLine(xpos+1, 27, xpos+1, 104, ST77XX_BLACK);
+      xpos++;
+    }
+    yold = ypos; 
   }
 }
 

@@ -145,6 +145,9 @@ Found more events in night session data.
 Tried hooking up 0.96 OLED 1306 screen. Only every second line shows up. Board likely broken (glass chipped in corner).
 * Adjusted Uno code to read signal and time into variables
 
+## 19.09.2019
+Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 200Hz sampling with Adafruit libraries. 
+* Plotting failry clean with npoise only. To be tested with real ECG sensors.
 
 ## Event list
 * Event @ 20190712-161609-0077
