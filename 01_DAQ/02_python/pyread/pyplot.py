@@ -21,6 +21,7 @@ data = pd.read_csv(sys.argv[1],header=None,names=['time','value'])
 
 #data = np.loadtxt(sys.argv[1])
 
-mp.plot(data['time']/1e3,data['value'])
+#mp.plot(data['time']/1e3,data['value'])
+mp.plot(data['value'])
 mp.show()
 

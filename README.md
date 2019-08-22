@@ -10,7 +10,7 @@ The main challenges are the following:
 
 - [X] Data acquisition concept
 - [X] Automatic data splitting into single or multiple beats
-- [ ] Model training in tensorflow
+- [ ] Model training in tensorflow --> Google Colab
 - [ ] Model translation for live interpretation (e.g. tflite)
 
 Currently three scenarios are envisioned.
@@ -147,7 +147,15 @@ Tried hooking up 0.96 OLED 1306 screen. Only every second line shows up. Board l
 
 ## 19.09.2019
 Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 200Hz sampling with Adafruit libraries. 
-* Plotting failry clean with npoise only. To be tested with real ECG sensors.
+* Plotting failry clean with noise only. To be tested with real ECG sensors.
+
+## 21.09.2019
+Installed ST7735S into case. Recorded 2h of data.
+* Pi hooked up to cellphone charger doesn't seem to work. Only hooked up to power-bank signals are clean.
+* Status LED doesn't respond anymore? To be tested on serial monitor. Possible delay required in python code.
+
+## 22.09.2019
+Recoded 1h of data. Recorded 7 events! Prepared overview plot for visualization.
 
 ## Event list
 * Event @ 20190712-161609-0077
@@ -155,6 +163,14 @@ Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 20
 * Event @ 20190728-021951-0251
 * Event @ 20190728-022955-0116
 * Event @ 20190728-030005-0361
+
+* Event @ 20190822-092110-0201 (41036)
+* Event @ 20190822-092110-0206 (42011)
+* Event @ 20190822-092110-0215 (43958)
+* Event @ 20190822-092110-0528 (114429)
+* Event @ 20190822-092110-0546 (118371)
+* Event @ 20190822-093115-0504 (108365)
+* Event @ 20190822-094120-0043 (10264)
 
 
 ![Loss Function](1-1-loss.png "Loss Function")

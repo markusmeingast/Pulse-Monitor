@@ -25,7 +25,7 @@ if len(sys.argv)<2:
 
 #####	Start setup time
 print('5min to set up, starting now')
-time.sleep(3)
+time.sleep(300)
 
 #####	Define and start serial communication
 try:
@@ -46,8 +46,8 @@ else:
 for tt in range(0,int(sys.argv[1])):
 
 	#####	Initialize empty array (rel. time, value)
-	##### 	1200k samples at 200Hz = 10min
-	n_len = 1200
+	##### 	120k samples at 200Hz = 10min
+	n_len = 120000
 	data = np.zeros((n_len,2),dtype=int)
 
 	#####	Initialize file name for saving
