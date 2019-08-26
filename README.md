@@ -157,12 +157,17 @@ Installed ST7735S into case. Recorded 2h of data.
 ## 22.09.2019
 Recoded 1h of data. Recorded 7 events! Prepared overview plot for visualization.
 
+## 26.09.2019
+Preprocessing more recorded data according to -60 +120 around peak. Still not convinced this is the best method. Fixed width is too restrictive.
+
 ## Event list
 * Event @ 20190712-161609-0077
 * Event @ 20190717-121646-0205
 * Event @ 20190728-021951-0251
 * Event @ 20190728-022955-0116
 * Event @ 20190728-030005-0361
+
+* Event @ 20190820-104626-0350
 
 * Event @ 20190822-092110-0201 (41036)
 * Event @ 20190822-092110-0206 (42011)
@@ -171,6 +176,10 @@ Recoded 1h of data. Recorded 7 events! Prepared overview plot for visualization.
 * Event @ 20190822-092110-0546 (118371)
 * Event @ 20190822-093115-0504 (108365)
 * Event @ 20190822-094120-0043 (10264)
+
+* Possible event @2 0190821-150754-0592
+
+
 
 
 ![Loss Function](1-1-loss.png "Loss Function")
