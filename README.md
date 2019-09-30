@@ -160,6 +160,9 @@ Recoded 1h of data. Recorded 7 events! Prepared overview plot for visualization.
 ## 26.09.2019
 Preprocessing more recorded data according to -60 +120 around peak. Still not convinced this is the best method. Fixed width is too restrictive.
 
+## 27.09.2019
+Trying to preprocess from peak to peak (regular heart beat), and stretching to fixed width.
+
 ## Event list
 * Event @ 20190712-161609-0077
 * Event @ 20190717-121646-0205
