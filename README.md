@@ -113,55 +113,59 @@ Fixed time stamp rest.
 * To be tested with 10min actual measurement
 * Max measurement interval should not exceed ~71min, limiting to segments of 10min should be no issue
 
-## 20.08.2019
+## 20.07.2019
 Combined available data into training and testing. Should be possible to start training on Google COLAB!
 * Moved data to Google Drive for faster access.
 * GPU LSTM works! Setup generally seems fine and visualization makes sense.
 * Normalized data for faster convergence, but can't get below ~46% loss.
 * Alternate idea, use single beat input for single beat target, aligned at right (peak position the same for all).
 
-## 22.08.2019
+## 22.07.2019
 Reworked test and training sets.
 * Aligned right, with 1 beat input and 1 beat output.
 * Residual loss at ~0.6% at 100 epochs.
 * Prediction on training and testing looks ok, likely needs a lot more data for better loss values.
 * PVC detection as a concept would definitely work!
 
-## 27.08.2019
+## 27.07.2019
 Recording a bit noisey, interference from somewhere...
 * Added status indication LED to arduino. Blue LED on indicates recording.
 * Added self quit after 1000 errors.
 * Recorded 6 x 10min
 
-## 29.08.2019
+## 29.07.2019
 Built enclosure for AD8232 and Uno.
 * Adjusted delay to 0.5 after reset for indicator LED
 * Preprocessing data with peak -60 +120 samples fixed length as alternative
 
-## 30.08.2019
+## 30.07.2019
 Found more events in night session data.
 
-## 16.09.2019
+## 16.08.2019
 Tried hooking up 0.96 OLED 1306 screen. Only every second line shows up. Board likely broken (glass chipped in corner).
 * Adjusted Uno code to read signal and time into variables
 
-## 19.09.2019
+## 19.08.2019
 Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 200Hz sampling with Adafruit libraries. 
 * Plotting failry clean with noise only. To be tested with real ECG sensors.
 
-## 21.09.2019
+## 21.08.2019
 Installed ST7735S into case. Recorded 2h of data.
 * Pi hooked up to cellphone charger doesn't seem to work. Only hooked up to power-bank signals are clean.
 * Status LED doesn't respond anymore? To be tested on serial monitor. Possible delay required in python code.
 
-## 22.09.2019
+## 22.08.2019
 Recoded 1h of data. Recorded 7 events! Prepared overview plot for visualization.
 
-## 26.09.2019
+## 26.08.2019
 Preprocessing more recorded data according to -60 +120 around peak. Still not convinced this is the best method. Fixed width is too restrictive.
 
-## 27.09.2019
+## 27.08.2019
 Trying to preprocess from peak to peak (regular heart beat), and stretching to fixed width.
+
+## 30.09.2019
+Fixed dates in README.
+* Cleaning raw and sample data from repo to reduced total repo size.
 
 ## Event list
 * Event @ 20190712-161609-0077
