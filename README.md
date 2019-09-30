@@ -166,6 +166,9 @@ Trying to preprocess from peak to peak (regular heart beat), and stretching to f
 ## 30.09.2019
 Fixed dates in README.
 * Cleaning raw and sample data from repo to reduced total repo size.
+* Removed csv / png from tracking with gitignore
+* Running BFG on all csv / png and replacing non raw/sample files from backup
+* Seems to have worked! Repopulating with raw and sample data (UNTRACKED!)
 
 ## Event list
 * Event @ 20190712-161609-0077
