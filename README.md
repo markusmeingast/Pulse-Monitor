@@ -171,6 +171,11 @@ Fixed dates in README.
 * Seems to have worked! Repopulating with raw and sample data (UNTRACKED!)
 
 ## Event list
+* Event @ 20191004-235443-0316
+* Event @ 20191005-003510-0408
+
+
+## CLEAN AGAIN!
 * Event @ 20190712-161609-0077
 * Event @ 20190717-121646-0205
 * Event @ 20190728-021951-0251
