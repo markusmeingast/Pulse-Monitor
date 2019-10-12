@@ -1,4 +1,4 @@
-#!/home/pi/Software/python3.7/bin/python3
+#!/home/markus/.pyenv/shims/python3
 
 import pandas as pd
 import glob

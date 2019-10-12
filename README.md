@@ -170,7 +170,13 @@ Fixed dates in README.
 * Running BFG on all csv / png and replacing non raw/sample files from backup
 * Seems to have worked! Repopulating with raw and sample data (UNTRACKED!)
 
+## 12.10.2019
+More measurement data. Total of 51 events recorded. Possibly enough for feasibiliuty check?
+
 ## Event list
+TO BE FIXED
+
+
 * Event @ 20191004-235443-0316
 * Event @ 20191005-003510-0408
 
