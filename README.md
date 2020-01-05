@@ -1,11 +1,11 @@
 # PULSE-MONITOR
-Concept work for a heart beat monitor to predict intermittent PVC arrhythmia. 
+Concept work for a heart beat monitor to predict intermittent PVC arrhythmia.
 
 This work is currently ongoing. Primarily the focus is on data acquisition, in order to build a sufficiently large dataset to work with.
 Due to the nature of measured intermittent arrhythmia, a large class imbalance in the measurement data is present, at about 1:2000.
 
 # Basic concept:
-The idea of this project is to measure heart rythm by means of a ~~IR~~ AD8232 ECG based pulse sensor and predict the onset of premature ventricular contractions based on the last few measured heart-beats. 
+The idea of this project is to measure heart rythm by means of a ~~IR~~ AD8232 ECG based pulse sensor and predict the onset of premature ventricular contractions based on the last few measured heart-beats.
 
 A prediction model was initially built based on a tensorflow RNN, e.g. LSTM cells, based on various length signal input to accurately capture varying bpms. Due to the computational expense of learning based on time series input as well as output, the model will likely be adapted to use time-deltas and amplitudes as input, rather than raw measurements.
 
@@ -23,6 +23,10 @@ Currently three scenarios are envisioned.
 1. DAQ runs through a Arduino Nano, routing data by serial to Raspberry Pi for splitting, processing and storing.
 1. ~~DAQ runs directly through the Raspberry Pi by means of GPIO, effectively removing the Nano fromt he~~ chain.
 1. ~~DAQ and processing run through the Nano, with dedicated SD storage extension shield.~~
+
+## Current Setup
+
+![Measurement System](measurement_system.png "Measurement System")
 
 ## Example of signal splitting
 
@@ -188,7 +192,7 @@ Installed ST7735S into case. Recorded 2h of data.
 * Status LED doesn't respond anymore? To be tested on serial monitor. Possible delay required in python code.
 
 ## 19.08.2019
-Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 200Hz sampling with Adafruit libraries. 
+Hooked up ST7735S TFT screen to arduino. Plotting seems to work while keeping 200Hz sampling with Adafruit libraries.
 * Plotting failry clean with noise only. To be tested with real ECG sensors.
 
 ## 16.08.2019
@@ -237,7 +241,7 @@ Further development of processing chain.
 * Combine events with following peak for consistency? Following peak strongly influenced in length by event using 70 sample cut. Keeping as is for now for first testing.
 
 ## 17.07.2019
-Time stamp reset seems too buggy, has been removed. 
+Time stamp reset seems too buggy, has been removed.
 * <del>Switched from micros() to millis() due to rollover issue after 71min. millis() sould be fine for ~50days.</del>
 * Recorded 2x 10min with millis(). Signals good, no significant issues. Time stamp may be of by 10% though...
 * Recorded additional 6x 10min. Some interference seems present. Possibly cell phone?
@@ -255,7 +259,7 @@ First peak detection started for further processing.
 * Included peak detection concept in notebook
 
 ## 12.07.2019
-Attached AD8232 ECG sensor as an alternative to KY039. 
+Attached AD8232 ECG sensor as an alternative to KY039.
 * Basic setup based on [Sparkfun guide](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/all).
  * Yellow: left arm
  * Red: right arm
@@ -306,4 +310,3 @@ Set up basic serial communication between Arduino **Uno** (for testing/prototypi
 Starting basic setup work for Arduino **Nano** (C-Control compatible board) and Raspberry **Pi** 3 B+.
 * Added "blink" example as placeholder to Nano
 * Set up python 3.7.3 on Pi
-
