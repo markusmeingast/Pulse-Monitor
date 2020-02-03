@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # PULSE-MONITOR
 Concept work for a heart beat monitor to predict intermittent PVC arrhythmia.
 
